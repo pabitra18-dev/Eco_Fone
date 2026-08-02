@@ -1,10 +1,10 @@
 'use client';
-export const dynamic = 'force-dynamic';
+
+import React, { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { DemandForm } from "@/components/demand-form";
 import { Handshake, LogIn, Smartphone } from "lucide-react";
-import { useSearchParams } from 'next/navigation';
 import { getDemandById } from "@/app/account/demands/actions";
-import { useEffect, useState }from 'react';
 import type { Demand } from '@/lib/types';
 import { useAuth } from "@/hooks/use-auth";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
+// Loading Skeleton UI used both for Initial Loading and Suspense Fallback
 const DemandPageSkeleton = () => (
     <div className="container mx-auto px-4 py-16 flex justify-center">
         <div className="w-full max-w-3xl">
@@ -37,8 +38,8 @@ const DemandPageSkeleton = () => (
     </div>
 );
 
-
-export default function DemandPage() {
+// Inner Content Component dealing directly with URL Search Params
+function DemandContent() {
     const searchParams = useSearchParams();
     const editingId = searchParams.get('edit');
     const { isAuthenticated, getIdToken } = useAuth();
@@ -77,19 +78,18 @@ export default function DemandPage() {
 
         if (isAuthenticated) {
             fetchDemandData();
-        } else if(isAuthenticated === false) {
+        } else if (isAuthenticated === false) {
              setLoading(false);
         }
 
     }, [editingId, isAuthenticated, getIdToken]);
-
 
     if (loading || isAuthenticated === null) {
         return (
              <section className="py-16 bg-background">
                 <DemandPageSkeleton />
              </section>
-        )
+        );
     }
 
     if (!isAuthenticated) {
@@ -126,7 +126,7 @@ export default function DemandPage() {
                     </Button>
                 </div>
              </section>
-        )
+        );
     }
 
     return (
@@ -146,5 +146,18 @@ export default function DemandPage() {
                 </div>
             </div>
         </section>
+    );
+}
+
+// Main Page wrapper providing the essential Suspense context required by Next.js 15
+export default function DemandPage() {
+    return (
+        <Suspense fallback={
+            <section className="py-16 bg-background">
+                <DemandPageSkeleton />
+            </section>
+        }>
+            <DemandContent />
+        </Suspense>
     );
 }
