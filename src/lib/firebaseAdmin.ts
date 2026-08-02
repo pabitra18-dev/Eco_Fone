@@ -19,5 +19,6 @@ if (!admin.apps.length) {
 
 const db = admin.apps.length ? admin.firestore() : null;
 
-export { db };
+// Export both named variants and default variant to fix all action file imports
+export { db, admin };
 export default admin;
