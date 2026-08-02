@@ -1,18 +1,23 @@
 import admin from 'firebase-admin';
 
 if (!admin.apps.length) {
-  const serviceAccount = JSON.parse(
-    process.env.FIREBASE_SERVICE_ACCOUNT_KEY || '{}'
-  );
-
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-  });
+  try {
+    const rawKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+    
+    if (!rawKey) {
+      console.warn("Firebase private key environment variable is missing.");
+    } else {
+      const serviceAccount = JSON.parse(rawKey);
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+      });
+    }
+  } catch (error) {
+    console.error("Failed to parse FIREBASE_SERVICE_ACCOUNT_KEY:", error);
+  }
 }
 
-// Initialize the Firestore Admin instance
-const db = admin.firestore();
+const db = admin.apps.length ? admin.firestore() : null;
 
-// Export both the main admin instance and the db instance
 export { db };
 export default admin;
