@@ -1,6 +1,5 @@
-export const dynamic = 'force-dynamic';
 'use client';
-
+export const dynamic = 'force-dynamic';
 import { DemandForm } from "@/components/demand-form";
 import { Handshake, LogIn, Smartphone } from "lucide-react";
 import { useSearchParams } from 'next/navigation';
