@@ -42,6 +42,7 @@ next-env.d.ts
 
 # firebase
 firebase-debug.log
-firestore-debug.log.firebase/
+firestore-debug.log
+.firebase/
 .agents/
 eco-fone-nepal-firebase-adminsdk-fbsvc-96b8840e2e.json
