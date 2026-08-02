@@ -1,0 +1,18 @@
+
+{
+  "defaultPlaceholder": {
+    "src": "https://storage.googleapis.com/eco-fone-nepal.appspot.com/assets/placeholder.png",
+    "alt": "Smartphone on a laptop",
+    "aiHint": "smartphone clean"
+  },
+  "whyUsHero": {
+    "src": "https://storage.googleapis.com/eco-fone-nepal.appspot.com/assets/why-us-hero.png",
+    "alt": "Eco-Fone Nepal team working",
+    "aiHint": "team work"
+  },
+  "reviewerAvatar1": {
+    "src": "https://storage.googleapis.com/eco-fone-nepal.appspot.com/assets/reviewer-avatar-1.png",
+    "alt": "Anjali K.",
+    "aiHint": "woman portrait"
+  }
+}

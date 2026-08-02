@@ -1,0 +1,111 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 48 20% 95%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 147 55% 45%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 15%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 147 55% 45%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 147 55% 45%;
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 150 15% 10%;
+    --foreground: 210 20% 98%;
+    --card: 150 15% 15%;
+    --card-foreground: 210 20% 98%;
+    --popover: 150 15% 12%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 147 55% 45%;
+    --primary-foreground: 147 50% 98%;
+    --secondary: 150 15% 20%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 150 15% 18%;
+    --muted-foreground: 210 20% 65%;
+    --accent: 147 55% 45%;
+    --accent-foreground: 147 50% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 150 15% 25%;
+    --input: 150 15% 25%;
+    --ring: 147 55% 45%;
+  }
+}
+
+@layer base {
+  /* --- AGGRESSIVE RESET: FIXES THE TOP OFFSET --- */
+  html, body {
+      margin: 0 !important; 
+      padding: 0 !important;
+      height: 100%; 
+      box-sizing: border-box; 
+  }
+
+  h1, h2, h3, h4, h5, h6, p, ul, ol {
+      margin: 0 !important;
+      padding: 0 !important;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  .bg-grid-green-500\/10::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, hsl(var(--primary)/.1) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary)/.1) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,#000 70%,transparent 100%);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,#000 70%,transparent 100%);
+  }
+}
+
+@layer utilities {
+    .bg-green-50 {
+        background-color: hsl(var(--primary) / 0.05);
+    }
+    .dark .bg-green-900\/20 {
+        background-color: hsl(var(--primary) / 0.1);
+    }
+    .border-green-200 {
+        border-color: hsl(var(--primary) / 0.2);
+    }
+    .dark .border-green-800 {
+        border-color: hsl(var(--primary) / 0.3);
+    }
+     .bg-blue-50 {
+        background-color: hsl(var(--muted));
+    }
+    .dark .bg-blue-900\/20 {
+        background-color: hsl(var(--muted));
+    }
+    .border-blue-200 {
+        border-color: hsl(var(--border));
+    }
+    .dark .border-blue-800 {
+        border-color: hsl(var(--border));
+    }
+}
