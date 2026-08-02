@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'; // Tells Next.js not to pre-render this page during the build
 
 import { getTestimonials } from "@/lib/testimonials";
 import { TestimonialsManager } from "@/components/admin/testimonials-manager";
