@@ -3,7 +3,7 @@
 'use server';
 
 import type { SiteUser } from './types';
-import { db as adminDb, admin } from './firebaseAdmin';
+import admin, { db } from './firebaseAdmin';
 
 export async function getUsers(): Promise<SiteUser[]> {
   try {
