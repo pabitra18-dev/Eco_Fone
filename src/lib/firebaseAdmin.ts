@@ -1,24 +1,15 @@
+import admin from 'firebase-admin';
 
-import * as admin from 'firebase-admin';
-import { getFirestore, Firestore } from 'firebase-admin/firestore';
-import { initializeApp, cert, App, getApps, getApp } from 'firebase-admin/app';
-import { getStorage, Storage } from 'firebase-admin/storage';
-import serviceAccount from '@/../eco-fone-nepal-firebase-adminsdk-fbsvc-96b8840e2e.json';
+if (!admin.apps.length) {
+  // Parse the service account details from an environment variable string
+  const serviceAccount = JSON.parse(
+    process.env.FIREBASE_SERVICE_ACCOUNT_KEY || '{}'
+  );
 
-let firebaseAdminApp: App;
-
-const firebaseConfig = {
-  credential: cert(serviceAccount as admin.ServiceAccount),
-  storageBucket: 'eco-fone-nepal.appspot.com',
-};
-
-
-if (getApps().length === 0) {
-  firebaseAdminApp = initializeApp(firebaseConfig);
-} else {
-  firebaseAdminApp = getApp();
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    // databaseURL: "https://your-database-name.firebaseio.com" // include if needed
+  });
 }
 
-export const db: Firestore = getFirestore(firebaseAdminApp);
-export const storage: Storage = getStorage(firebaseAdminApp);
-export { firebaseAdminApp as admin };
+export default admin;
